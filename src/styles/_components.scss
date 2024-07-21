@@ -1,0 +1,29 @@
+.article-card {
+  border: 1px solid $secondary-color;
+  margin: 20px;
+  padding: 20px;
+  transition: box-shadow 0.3s;
+
+  &:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+  .article-card {
+    // existing styles
+    @media (max-width: $breakpoint-tablet) {
+      margin: 10px;
+      padding: 10px;
+    }
+  }
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

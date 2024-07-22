@@ -1,5 +1,40 @@
+// common styling
+#root {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.overflow-vertical {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.min-h-100 {
+  min-height: 100%;
+}
+
+.disabled {
+  cursor: no-drop;
+  opacity: 0.85;
+}
+
 .form-label {
   font-weight: bold;
   font-size: $font-size-sm;
   color: $secondary;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px; /* For horizontal scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: lightgray;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
 }

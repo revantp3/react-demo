@@ -9,7 +9,7 @@ const ArticleList = () => {
     selectFilteredAndSortedArticles
   );
   const [currentPage, setCurrentPage] = useState(1);
-  const articlesPerPage = 5; 
+  const articlesPerPage = 5;
 
   // Get current articles
   const indexOfLastArticle = currentPage * articlesPerPage;
@@ -24,10 +24,12 @@ const ArticleList = () => {
 
   return (
     <>
-      <div className="card-layout mb-4">
-        {currentArticles.map((article) => (
-          <ArticleCard key={article.title} article={article} />
-        ))}
+      <div className="flex-grow-1 overflow-auto">
+        <div className="card-layout py-2">
+          {currentArticles.map((article) => (
+            <ArticleCard key={article.title} article={article} />
+          ))}
+        </div>
       </div>
       <Pagination
         itemsPerPage={articlesPerPage}

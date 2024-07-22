@@ -34,7 +34,7 @@ const Filters = () => {
 
   return (
     <>
-      <Row>
+      <Row className="gy-3">
         <Col md={6}>
           <Form.Label htmlFor="category-filter">Filter by Category:</Form.Label>
           <Form.Select

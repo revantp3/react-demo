@@ -1,8 +1,27 @@
 // $primary: #022F40;
 $primary: #345995;
+$secondary: #022F40;
 $font-family-base: "Noto Sans", sans-serif;
 
-// Responsive breakpoints
-$breakpoint-mobile: 480px;
-$breakpoint-tablet: 768px;
-$breakpoint-desktop: 1024px;
+$enable-shadows: true;
+
+// Border variables
+$border-color: #f0f0f0;
+$border-radius: 0.5rem;
+
+// Card variables
+$card-border-color: $border-color;
+$card-box-shadow: 0 1px 3px rgba($primary, 0.12);
+
+// Form variables
+$form-select-box-shadow: $card-box-shadow;
+
+// Pagination variables
+$pagination-font-size: 0.875rem;
+
+// SideMenu variables
+$side-menu-width: 72px;
+$side-menu-hover-width: 240px;
+$side-menu-bg: #020c40;
+$profile-size: 40px;
+$side-menu-toggler-color: #020c40;

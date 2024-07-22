@@ -11,7 +11,7 @@ const Pagination: React.FC<PaginationProps> = ({
   itemsPerPage,
   totalItems,
   paginate,
-  currentPage
+  currentPage,
 }) => {
   const pageCount = Math.ceil(totalItems / itemsPerPage);
 
@@ -22,8 +22,8 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <nav aria-label="Article Pagination">
-      <ul className="pagination">
+    <nav className="mt-auto" aria-label="Article Pagination">
+      <ul className="pagination justify-content-center justify-content-sm-end mb-0">
         <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
           <button
             onClick={() => handlePageChange(currentPage - 1)}
@@ -38,7 +38,9 @@ const Pagination: React.FC<PaginationProps> = ({
           return (
             <li
               key={pageNumber}
-              className={`page-item ${pageNumber === currentPage ? "active" : ""}`}
+              className={`page-item ${
+                pageNumber === currentPage ? "active" : ""
+              }`}
             >
               <button
                 onClick={() => handlePageChange(pageNumber)}
@@ -49,7 +51,9 @@ const Pagination: React.FC<PaginationProps> = ({
             </li>
           );
         })}
-        <li className={`page-item ${currentPage === pageCount ? "disabled" : ""}`}>
+        <li
+          className={`page-item ${currentPage === pageCount ? "disabled" : ""}`}
+        >
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             className="page-link"

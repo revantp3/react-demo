@@ -17,6 +17,7 @@ const ArticleCard = ({ article }: { article: any }) => {
             dangerouslySetInnerHTML={{ __html: article.title }}
           ></Card.Title>
           <Card.Text
+            title={article.body}
             dangerouslySetInnerHTML={{ __html: article.body }}
           ></Card.Text>
         </Card.Body>

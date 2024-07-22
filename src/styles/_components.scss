@@ -3,9 +3,12 @@
 .card {
   overflow: hidden;
   transition: $transition-base;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
 
   &:hover {
     border: 1px solid $primary;
+    // animation: fadeOut 1s forwards;
   }
 
   &-img-top {

@@ -1,18 +1,17 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../services/store';
+import { selectFilteredArticles } from '../features/states/slice';
+import { useAppSelector } from '../hooks/hooks';
 import ArticleCard from './ArticleCard';
-import Pagination from './Pagination';
 
 const ArticleList = () => {
-  const articles = useSelector((state: RootState) => state.articles.articles);
-
+  // const articles = useSelector((state: RootState) => state.articles.articles);
+  const filteredArticles = useAppSelector(selectFilteredArticles);
+  console.log(filteredArticles)
   return (
     <div>
-      {articles.map(article => (
+      {filteredArticles.map(article => (
         <ArticleCard key={article.title} article={article} />
       ))}
-      <Pagination />
+      {/* <Pagination /> */}
     </div>
   );
 };

@@ -27,7 +27,7 @@ const Home = () => {
         (articles?.length > 0 ? (
           <div>
             <ArticleList />
-            <Pagination />
+            {/* <Pagination /> */}
           </div>
         ) : (
           <p>No articles found. Please adjust your filters or try again later.</p>

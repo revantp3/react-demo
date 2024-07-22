@@ -1,43 +1,63 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../services/store";
-import { setCurrentPage } from "../features/states/slice";
 
-const Pagination = () => {
-  const dispatch = useDispatch();
-  const articles = useSelector((state: RootState) => state.articles.articles);
-  const currentPage = useSelector(
-    (state: RootState) => state.articles.currentPage
-  );
-  const articlesPerPage = 5; 
+interface PaginationProps {
+  itemsPerPage: number;
+  totalItems: number;
+  paginate: (pageNumber: number) => void;
+  currentPage: number;
+}
 
-  const pageCount = Math.ceil(articles.length / articlesPerPage);
+const Pagination: React.FC<PaginationProps> = ({
+  itemsPerPage,
+  totalItems,
+  paginate,
+  currentPage
+}) => {
+  const pageCount = Math.ceil(totalItems / itemsPerPage);
 
-  const handlePageChange = (page: number) => {
-    dispatch(setCurrentPage(page));
+  const handlePageChange = (newPage: number) => {
+    if (newPage > 0 && newPage <= pageCount) {
+      paginate(newPage);
+    }
   };
 
-  const pageNumbers = [];
-  for (let i = 1; i <= pageCount; i++) {
-    pageNumbers.push(i);
-  }
-
   return (
-    <nav>
+    <nav aria-label="Article Pagination">
       <ul className="pagination">
-        {pageNumbers.map((number) => (
-          <li
-            key={number}
-            className={`page-item ${number === currentPage ? "active" : ""}`}
+        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            className="page-link"
+            aria-label="Previous Page"
           >
-            <button
-              onClick={() => handlePageChange(number)}
-              className="page-link"
+            Previous
+          </button>
+        </li>
+        {[...Array(pageCount).keys()].map((i) => {
+          const pageNumber = i + 1;
+          return (
+            <li
+              key={pageNumber}
+              className={`page-item ${pageNumber === currentPage ? "active" : ""}`}
             >
-              {number}
-            </button>
-          </li>
-        ))}
+              <button
+                onClick={() => handlePageChange(pageNumber)}
+                className="page-link"
+              >
+                {pageNumber}
+              </button>
+            </li>
+          );
+        })}
+        <li className={`page-item ${currentPage === pageCount ? "disabled" : ""}`}>
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            className="page-link"
+            aria-label="Next Page"
+          >
+            Next
+          </button>
+        </li>
       </ul>
     </nav>
   );

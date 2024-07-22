@@ -7,7 +7,7 @@ import Pagination from './Pagination';
 const ArticleList = () => {
   const filteredAndSortedArticles = useAppSelector(selectFilteredAndSortedArticles);
   const [currentPage, setCurrentPage] = useState(1);
-  const articlesPerPage = 5;  // Adjust this value as needed
+  const articlesPerPage = 5; 
 
   // Get current articles
   const indexOfLastArticle = currentPage * articlesPerPage;

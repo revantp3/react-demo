@@ -1,15 +1,27 @@
-import React from "react";
-import "../styles/index.scss";
+import "../styles/app.scss";
+
+import Card from "react-bootstrap/Card";
+
+const APP_URL = "https://dummy-rest-api.specbee.site";
 
 const ArticleCard = ({ article }: { article: any }) => {
-  const imageUrl = article.image || "path/to/default/image.jpg";
+  const imageUrl = APP_URL + article.image || "path/to/default/image.jpg";
 
   return (
-    <div className="article-card">
-      <img src={imageUrl} alt={article.title} />
-      <h3>{article.title}</h3>
-      <p>{article.summary}</p>
-    </div>
+    <>
+      <Card>
+        <Card.Img variant="top" src={imageUrl} alt={article.title} />
+        <Card.Body>
+          <Card.Title
+            title={article.title}
+            dangerouslySetInnerHTML={{ __html: article.title }}
+          ></Card.Title>
+          <Card.Text
+            dangerouslySetInnerHTML={{ __html: article.body }}
+          ></Card.Text>
+        </Card.Body>
+      </Card>
+    </>
   );
 };
 

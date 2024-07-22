@@ -1,19 +1,5 @@
-body {
-    font-family: $font-stack;
-    margin: 0;
-    padding: 0;
-    background-color: #ecf0f1;
-  }
-  
-  button {
-    background-color: $primary-color;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-  
-    &:hover {
-      background-color: darken($primary-color, 10%);
-    }
-  }
-  
+.form-label {
+  font-weight: bold;
+  font-size: $font-size-sm;
+  color: $secondary;
+}

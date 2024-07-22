@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import Form from "react-bootstrap/Form";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuthorFilter, setCategoryFilter } from "../features/states/slice";
 import { RootState } from "../services/store";
-import { setCategoryFilter, setAuthorFilter } from "../features/states/slice";
+
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 const Filters = () => {
   const dispatch = useDispatch();
@@ -29,38 +33,40 @@ const Filters = () => {
   };
 
   return (
-    <div>
-      <div>
-        <label htmlFor="category-filter">Filter by Category:</label>
-        <select
-          id="category-filter"
-          onChange={handleCategoryChange}
-          defaultValue=""
-        >
-          <option value="">All Categories</option>
-          {categories.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="author-filter">Filter by Author:</label>
-        <select
-          id="author-filter"
-          onChange={handleAuthorChange}
-          defaultValue=""
-        >
-          <option value="">All Authors</option>
-          {authors.map((author) => (
-            <option key={author} value={author}>
-              {author}
-            </option>
-          ))}
-        </select>
-      </div>
-    </div>
+    <>
+      <Row>
+        <Col md={6}>
+          <Form.Label htmlFor="category-filter">Filter by Category:</Form.Label>
+          <Form.Select
+            id="category-filter"
+            onChange={handleCategoryChange}
+            defaultValue=""
+          >
+            <option value="">All Categories</option>
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </Form.Select>
+        </Col>
+        <Col md={6}>
+          <Form.Label htmlFor="author-filter">Filter by Author:</Form.Label>
+          <Form.Select
+            id="author-filter"
+            onChange={handleAuthorChange}
+            defaultValue=""
+          >
+            <option value="">All Authors</option>
+            {authors.map((author) => (
+              <option key={author} value={author}>
+                {author}
+              </option>
+            ))}
+          </Form.Select>
+        </Col>
+      </Row>
+    </>
   );
 };
 

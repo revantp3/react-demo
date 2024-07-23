@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const ToggleView = () => {
-  const [viewMode, setViewMode] = useState('list'); // 'list' or 'grid'
+  const [viewMode, setViewMode] = useState('list');
 
   const toggleView = () => {
     setViewMode(viewMode === 'list' ? 'grid' : 'list');

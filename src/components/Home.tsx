@@ -10,6 +10,7 @@ import Loader from "./Loader";
 import SortControls from "./SortControls";
 import SideMenu from "./SideMenu";
 import { Button, Collapse } from "react-bootstrap";
+import ToggleView from "./ToggleView";
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -45,7 +46,6 @@ const Home = () => {
     <>
       <div className="d-flex h-100 overflow-hidden gap-3 p-3">
         <SideMenu />
-
         <Container className="main-container d-flex flex-column py-3 py-sm-4 flex-grow-1 gap-3 gap-sm-4 overflow-hidden">
           <div className="d-flex justify-content-between justify-content-sm-center align-items-center">
             {/* Title */}

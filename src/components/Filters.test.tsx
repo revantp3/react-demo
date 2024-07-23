@@ -64,10 +64,6 @@ describe("Filters Component", () => {
       />
     );
 
-    // Simulate setting state directly if necessary
-    // Update the component with new props if you want to test different category and author lists
-
-    // Example: check if the options are displayed
     expect(screen.getByText(/all categories/i)).toBeInTheDocument();
     expect(screen.getByText(/all authors/i)).toBeInTheDocument();
   });

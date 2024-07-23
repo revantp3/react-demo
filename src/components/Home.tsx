@@ -20,6 +20,12 @@ const Home = () => {
   const [isSortControlsCollapsed, setIsSortControlsCollapsed] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedAuthor, setSelectedAuthor] = useState<string>("");
+  const [selectedSort, setSelectedSort] = useState<
+    "date_desc" | "date_asc" | "title_asc" | "title_desc"
+  >("date_desc");
+
   const handleResize = useCallback(() => {
     setIsMobile(window.innerWidth < 768);
   }, []);
@@ -38,9 +44,9 @@ const Home = () => {
   return (
     <>
       <div className="d-flex h-100 overflow-hidden gap-3 p-3">
-        <SideMenu></SideMenu>
+        <SideMenu />
 
-        <Container className="main-container d-flex flex-column py-3 py-sm-4 flex-grow-1 gap-4 overflow-hidden">
+        <Container className="main-container d-flex flex-column py-3 py-sm-4 flex-grow-1 gap-3 gap-sm-4 overflow-hidden">
           <div className="d-flex justify-content-between justify-content-sm-center align-items-center">
             {/* Title */}
             <h1 className="text-primary mb-0 text-center fw-bold">Articles</h1>
@@ -75,32 +81,51 @@ const Home = () => {
               </Button>
             </div>
           )}
-          <Row
-            className="gy-3"
-          >
-            <Col md={8}>
-              {isMobile ? (
-                <Collapse in={!isFiltersCollapsed}>
-                  <div id="filters-collapse">
-                    <Filters />
-                  </div>
-                </Collapse>
-              ) : (
-                <Filters />
-              )}
-            </Col>
-            <Col md={4}>
-              {isMobile ? (
-                <Collapse in={!isSortControlsCollapsed}>
-                  <div id="sort-controls-collapse">
-                    <SortControls />
-                  </div>
-                </Collapse>
-              ) : (
-                <SortControls />
-              )}
-            </Col>
+          <Row className="gy-3">
+            {!isMobile || !isFiltersCollapsed ? (
+              <Col md={8}>
+                {isMobile ? (
+                  <Collapse in={!isFiltersCollapsed}>
+                    <div id="filters-collapse">
+                      <Filters
+                        selectedCategory={selectedCategory}
+                        selectedAuthor={selectedAuthor}
+                        setSelectedCategory={setSelectedCategory}
+                        setSelectedAuthor={setSelectedAuthor}
+                      />
+                    </div>
+                  </Collapse>
+                ) : (
+                  <Filters
+                    selectedCategory={selectedCategory}
+                    selectedAuthor={selectedAuthor}
+                    setSelectedCategory={setSelectedCategory}
+                    setSelectedAuthor={setSelectedAuthor}
+                  />
+                )}
+              </Col>
+            ) : null}
+            {!isMobile || !isSortControlsCollapsed ? (
+              <Col md={4}>
+                {isMobile ? (
+                  <Collapse in={!isSortControlsCollapsed}>
+                    <div id="sort-controls-collapse">
+                      <SortControls
+                        selectedSort={selectedSort}
+                        setSelectedSort={setSelectedSort}
+                      />
+                    </div>
+                  </Collapse>
+                ) : (
+                  <SortControls
+                    selectedSort={selectedSort}
+                    setSelectedSort={setSelectedSort}
+                  />
+                )}
+              </Col>
+            ) : null}
           </Row>
+
           {/* End: Filters & Sorting */}
 
           {status === "loading" ? (
@@ -108,7 +133,6 @@ const Home = () => {
           ) : articles?.length > 0 ? (
             <ArticleList />
           ) : (
-            // {/* <Pagination /> */}
             <div className="w-100 bg-white rounded shadow-sm">
               <p className="d-flex align-items-center justify-content-center fw-bold text-danger mb-0 py-5">
                 No articles found. Please adjust your filters or try again

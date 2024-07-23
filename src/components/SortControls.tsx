@@ -3,19 +3,27 @@ import Form from "react-bootstrap/Form";
 import { useDispatch } from "react-redux";
 import { sortArticles } from "../features/states/slice";
 
-const SortControls = () => {
+interface SortControlsProps {
+  selectedSort: "date_desc" | "date_asc" | "title_asc" | "title_desc";
+  setSelectedSort: (
+    sort: "date_desc" | "date_asc" | "title_asc" | "title_desc"
+  ) => void;
+}
+
+const SortControls: React.FC<SortControlsProps> = ({
+  selectedSort,
+  setSelectedSort,
+}) => {
   const dispatch = useDispatch();
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(
-      sortArticles(
-        event.target.value as
-          | "date_desc"
-          | "date_asc"
-          | "title_asc"
-          | "title_desc"
-      )
-    );
+    const sort = event.target.value as
+      | "date_desc"
+      | "date_asc"
+      | "title_asc"
+      | "title_desc";
+    setSelectedSort(sort);
+    dispatch(sortArticles(sort));
   };
 
   return (
@@ -23,8 +31,8 @@ const SortControls = () => {
       <Form.Label htmlFor="sort-select">Sort Articles:</Form.Label>
       <Form.Select
         id="sort-select"
+        value={selectedSort}
         onChange={handleSortChange}
-        defaultValue="date_desc"
       >
         <option value="date_desc">Date - Newest to Oldest</option>
         <option value="date_asc">Date - Oldest to Newest</option>

@@ -9,6 +9,7 @@
   grid-gap: 1.5rem;
 
   @media screen and (max-width: 576px) {
+    gap: 1rem;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   }
 }

@@ -7,7 +7,19 @@ import { RootState } from "../services/store";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-const Filters = () => {
+interface FiltersProps {
+  selectedCategory: string;
+  selectedAuthor: string;
+  setSelectedCategory: (category: string) => void;
+  setSelectedAuthor: (author: string) => void;
+}
+
+const Filters: React.FC<FiltersProps> = ({
+  selectedCategory,
+  selectedAuthor,
+  setSelectedCategory,
+  setSelectedAuthor,
+}) => {
   const dispatch = useDispatch();
   const articles = useSelector((state: RootState) => state.articles.articles);
   const [categories, setCategories] = useState<string[]>([]);
@@ -25,11 +37,15 @@ const Filters = () => {
   const handleCategoryChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    dispatch(setCategoryFilter(event.target.value));
+    const category = event.target.value;
+    setSelectedCategory(category);
+    dispatch(setCategoryFilter(category));
   };
 
   const handleAuthorChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setAuthorFilter(event.target.value));
+    const author = event.target.value;
+    setSelectedAuthor(author);
+    dispatch(setAuthorFilter(author));
   };
 
   return (
@@ -39,8 +55,8 @@ const Filters = () => {
           <Form.Label htmlFor="category-filter">Filter by Category:</Form.Label>
           <Form.Select
             id="category-filter"
+            value={selectedCategory}
             onChange={handleCategoryChange}
-            defaultValue=""
           >
             <option value="">All Categories</option>
             {categories.map((category) => (
@@ -54,8 +70,8 @@ const Filters = () => {
           <Form.Label htmlFor="author-filter">Filter by Author:</Form.Label>
           <Form.Select
             id="author-filter"
+            value={selectedAuthor}
             onChange={handleAuthorChange}
-            defaultValue=""
           >
             <option value="">All Authors</option>
             {authors.map((author) => (

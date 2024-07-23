@@ -9,6 +9,10 @@
   overflow-x: hidden;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .min-h-100 {
   min-height: 100%;
 }
@@ -37,4 +41,18 @@
 
 ::-webkit-scrollbar-track {
   background: transparent;
+}
+
+// overlay style
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
 }

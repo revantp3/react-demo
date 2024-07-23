@@ -8,7 +8,6 @@
 
   &:hover {
     border: 1px solid $primary;
-    // animation: fadeOut 1s forwards;
   }
 
   &-img-top {
@@ -41,4 +40,9 @@
   p {
     margin-bottom: 0;
   }
+}
+
+// Modal styling
+.modal-content {
+  overflow: hidden;
 }

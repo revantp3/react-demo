@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -9,17 +9,31 @@ import Filters from "./Filters";
 import Loader from "./Loader";
 import SortControls from "./SortControls";
 import SideMenu from "./SideMenu";
+import { Button, Collapse } from "react-bootstrap";
 
 const Home = () => {
   const dispatch = useAppDispatch();
   const articles = useAppSelector(selectAllArticles);
   const status = useAppSelector((state: any) => state.articles.status);
 
+  const [isFiltersCollapsed, setIsFiltersCollapsed] = useState(true);
+  const [isSortControlsCollapsed, setIsSortControlsCollapsed] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  const handleResize = useCallback(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
   useEffect(() => {
     if (status === "idle") {
       dispatch(fetchArticles());
     }
   }, [status, dispatch]);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [handleResize]);
 
   return (
     <>
@@ -38,14 +52,57 @@ const Home = () => {
             </label>
           </div>
           {/* Filters & Sorting */}
-          <Row className="gy-3">
+          {isMobile && (
+            <div className="d-flex justify-content-end align-items-center gap-3">
+              <Button
+                variant="outline-primary"
+                onClick={() => setIsFiltersCollapsed(!isFiltersCollapsed)}
+                aria-controls="filters-collapse"
+                aria-expanded={!isFiltersCollapsed}
+              >
+                <span className="bi bi-funnel-fill"></span>
+              </Button>
+
+              <Button
+                variant="outline-primary"
+                onClick={() =>
+                  setIsSortControlsCollapsed(!isSortControlsCollapsed)
+                }
+                aria-controls="sort-controls-collapse"
+                aria-expanded={!isSortControlsCollapsed}
+              >
+                <span className="bi bi-filter-square-fill"></span>
+              </Button>
+            </div>
+          )}
+          <Row
+            className="gy-3"
+          >
             <Col md={8}>
-              <Filters />
+              {isMobile ? (
+                <Collapse in={!isFiltersCollapsed}>
+                  <div id="filters-collapse">
+                    <Filters />
+                  </div>
+                </Collapse>
+              ) : (
+                <Filters />
+              )}
             </Col>
             <Col md={4}>
-              <SortControls />
+              {isMobile ? (
+                <Collapse in={!isSortControlsCollapsed}>
+                  <div id="sort-controls-collapse">
+                    <SortControls />
+                  </div>
+                </Collapse>
+              ) : (
+                <SortControls />
+              )}
             </Col>
           </Row>
+          {/* End: Filters & Sorting */}
+
           {status === "loading" ? (
             <Loader />
           ) : articles?.length > 0 ? (

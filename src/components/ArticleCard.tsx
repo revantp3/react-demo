@@ -1,6 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "../styles/app.scss";
-
 import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -16,20 +15,18 @@ const ArticleCard = ({ article }: { article: any }) => {
 
   return (
     <>
-      <Card onClick={handleShow} className="cursor-pointer">
+      <Card onClick={handleShow} className="cursor-pointer" role="button">
         <Card.Img variant="top" src={imageUrl} alt={article.title} />
         <Card.Body>
           <Card.Title
-            title={article.title}
+            as="h5"
             dangerouslySetInnerHTML={{ __html: article.title }}
-          ></Card.Title>
-          <Card.Text
-            title={article.body}
-            dangerouslySetInnerHTML={{ __html: article.body }}
-          ></Card.Text>
+          />
+          <div dangerouslySetInnerHTML={{ __html: article.body }} />
         </Card.Body>
       </Card>
-      <Modal closeButton show={show} onHide={handleClose}>
+
+      <Modal show={show} onHide={handleClose} data-testid="article-modal">
         <Modal.Body>
           <Card className="shadow-none border-0">
             <Card.Img
@@ -38,32 +35,36 @@ const ArticleCard = ({ article }: { article: any }) => {
               src={imageUrl}
               alt={article.title}
             />
-            <Card.Text>
+            <div>
               <div className="d-flex justify-content-between">
                 <span>
-                  Source : <b>{article.source}</b>
+                  Source: <b>{article.source}</b>
                 </span>
                 <span>
-                  Date : <b>{article.date}</b>
+                  Date: <b>{article.date}</b>
                 </span>
               </div>
-            </Card.Text>
+            </div>
             <Card.Title
+              as="h5"
               className="mb-4 mt-3"
-              title={article.title}
               dangerouslySetInnerHTML={{ __html: article.title }}
-            ></Card.Title>
+            />
             <Card.Link href={article.url} target="_blank">
-              {article.url}
+              Read more
             </Card.Link>
-            <Card.Text
+            <div
               className="mt-3"
               dangerouslySetInnerHTML={{ __html: article.body }}
-            ></Card.Text>
+            />
           </Card>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="outline-primary" onClick={handleClose}>
+          <Button
+            variant="outline-primary"
+            onClick={handleClose}
+            data-testid="close-button"
+          >
             Close
           </Button>
         </Modal.Footer>

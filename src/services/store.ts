@@ -6,7 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import articlesReducer from "../features/states/slice";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   articles: articlesReducer,
 });
 

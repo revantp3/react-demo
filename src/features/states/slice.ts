@@ -32,6 +32,17 @@ interface ArticlesState {
   articlesPerPage: number;
 }
 
+export const fetchArticles = createAsyncThunk(
+  "articles/fetchArticles",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetchArticlesAPI();
+      return response;
+    } catch (err) {
+      return rejectWithValue("Failed to fetch articles");
+    }
+  }
+);
 // Initial state of the slice
 const initialState: ArticlesState = {
   articles: [],
@@ -47,17 +58,6 @@ const initialState: ArticlesState = {
 };
 
 // Async thunk for fetching articles
-export const fetchArticles = createAsyncThunk(
-  "articles/fetchArticles",
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await fetchArticlesAPI();
-      return response;
-    } catch (err) {
-      return rejectWithValue("Failed to fetch articles");
-    }
-  }
-);
 
 const articlesSlice = createSlice({
   name: "articles",
@@ -109,20 +109,20 @@ export const {
 // Export selectors
 export const selectAllArticles = (state: RootState) => state.articles.articles;
 
-export const selectFilteredArticles = createSelector(
-  [selectAllArticles, (state: RootState) => state.articles.filters],
-  (articles, filters) => {
-    return articles.filter((article) => {
-      const matchesCategory = filters.source
-        ? article.source === filters.source
-        : true;
-      const matchesAuthor = filters.author
-        ? article.author === filters.author
-        : true;
-      return matchesCategory && matchesAuthor;
-    });
-  }
-);
+// export const selectFilteredArticles = createSelector(
+//   [selectAllArticles, (state: RootState) => state.articles.filters],
+//   (articles, filters) => {
+//     return articles.filter((article) => {
+//       const matchesCategory = filters.source
+//         ? article.source === filters.source
+//         : true;
+//       const matchesAuthor = filters.author
+//         ? article.author === filters.author
+//         : true;
+//       return matchesCategory && matchesAuthor;
+//     });
+//   }
+// );
 
 export const selectCurrentPageArticles = (state: RootState) => {
   const { currentPage, articlesPerPage, articles } = state.articles;

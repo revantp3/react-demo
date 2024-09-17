@@ -15,22 +15,22 @@ const ArticleCard = ({ article }: { article: any }) => {
 
   return (
     <>
-      <Card onClick={handleShow} className="cursor-pointer" role="button">
-        <Card.Img variant="top" src={imageUrl} alt={article.title} />
+      <Card onClick={handleShow} className="cursor-pointer d-block d-md-flex flex-row align-items-center p-3 mb-3" role="button">
+        <Card.Img variant="top" src={imageUrl} alt={article.title} className='img-fluid'/>
         <Card.Body>
           <Card.Title
             as="h5"
             dangerouslySetInnerHTML={{ __html: article.title }}
           />
-          <div dangerouslySetInnerHTML={{ __html: article.body }} />
+          <div className="card-body-content" dangerouslySetInnerHTML={{ __html: article.body }} />
         </Card.Body>
       </Card>
 
       <Modal show={show} onHide={handleClose} data-testid="article-modal">
         <Modal.Body>
-          <Card className="shadow-none border-0">
+          <Card className="shadow-none align-items-center border-0 p-3">
             <Card.Img
-              className="rounded mb-3"
+              className="rounded"
               variant="top"
               src={imageUrl}
               alt={article.title}

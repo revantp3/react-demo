@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { Button, Collapse } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -8,11 +9,10 @@ import ArticleList from "./ArticleList";
 import Filters from "./Filters";
 import Loader from "./Loader";
 import SortControls from "./SortControls";
-import SideMenu from "./SideMenu";
-import { Button, Collapse } from "react-bootstrap";
-import ToggleView from "./ToggleView";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  let navigate = useNavigate();
   const dispatch = useAppDispatch();
   const articles = useAppSelector(selectAllArticles);
   const status = useAppSelector((state: any) => state.articles.status);
@@ -45,17 +45,10 @@ const Home = () => {
   return (
     <>
       <div className="d-flex h-100 overflow-hidden gap-3 p-3">
-        <SideMenu />
-        <Container className="main-container d-flex flex-column py-3 py-sm-4 flex-grow-1 gap-3 gap-sm-4 overflow-hidden">
+        <Container className="main-container bg-light d-flex flex-column py-3 py-sm-4 flex-grow-1 gap-3 gap-sm-4 overflow-hidden">
           <div className="d-flex justify-content-between justify-content-sm-center align-items-center">
             {/* Title */}
-            <h1 className="text-primary mb-0 text-center fw-bold">Articles</h1>
-            <label
-              className="side-menu-toggler d-sm-none"
-              htmlFor="sideMenuToggle"
-            >
-              <span className="bi bi-list"></span>
-            </label>
+
           </div>
           {/* Filters & Sorting */}
           {isMobile && (

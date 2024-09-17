@@ -1,7 +1,11 @@
 // $primary: #022F40;
-$primary: #345995;
+// $primary: #345995;
+$primary: #FFA500;
 $secondary: #022F40;
 $font-family-base: "Noto Sans", sans-serif;
+
+$gray-500: #565D6D;
+$gray-600: #171A1F;
 
 $enable-shadows: true;
 
@@ -19,11 +23,6 @@ $form-select-box-shadow: $card-box-shadow;
 // Pagination variables
 $pagination-font-size: 0.875rem;
 
-// SideMenu variables
-$side-menu-width: 72px;
-$side-menu-hover-width: 240px;
-$side-menu-bg: #020c40;
-$profile-size: 40px;
 $side-menu-toggler-color: #020c40;
 
 // Modal variables

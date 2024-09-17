@@ -4,7 +4,7 @@ const Loader = () => {
   return (
     <>
       <div className="overlay">
-        <Spinner animation="border" variant="primary" />;
+        <Spinner animation="border" variant="primary" />
       </div>
     </>
   );
